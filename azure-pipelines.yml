@@ -1,0 +1,133 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- develop
+
+pool:
+  vmImage: ubuntu-latest
+stages:
+  - stage: 
+    jobs:
+      - job:
+        displayName: Build
+        pool:
+         vmImage: ubuntu-latest
+
+        steps: 
+        
+        - task: DownloadSecureFile@1
+          name: sshfile
+          inputs:
+            secureFile: 'id_rsa.pub'
+            retryCount: 8
+        - task: DownloadSecureFile@1
+          inputs:
+            secureFile: 'clearly-dev.pfx'
+            retryCount: 8
+        - task: DownloadSecureFile@1
+          inputs:
+            secureFile: 'clearly-stage.pfx'
+            retryCount: 8
+        - task: DownloadSecureFile@1
+          inputs:
+            secureFile: 'clearly-main.pfx'
+            retryCount: 8
+
+        
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              pwd
+              ls
+              cd '$(Build.SourcesDirectory)/master/.ssh'
+              ls
+              
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'id_rsa.pub'
+            TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
+        
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'clearly-dev.pfx'
+            TargetFolder: '$(Build.SourcesDirectory)/master'
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'clearly-stage.pfx'
+            TargetFolder: '$(Build.SourcesDirectory)/master'
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'clearly-main.pfx'
+            TargetFolder: '$(Build.SourcesDirectory)/master'
+        
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              pwd
+              ls
+              cd '$(Build.SourcesDirectory)/master'
+              pwd
+              ls
+              cd '$(Build.SourcesDirectory)/master/.ssh'
+              pwd
+              ls
+         
+        - task: TerraformInstaller@1
+          inputs:
+           terraformVersion: 'latest'
+        - task: replacetokens@5
+          displayName: 'Replace tokens in **/*.tfvars **/*.tf '
+          inputs:
+            rootDirectory: '$(System.DefaultWorkingDirectory)/master'
+            targetFiles: |
+              **/*.tfvars
+              **/*.tf
+            encoding: 'auto'
+            tokenPattern: 'default'
+            writeBOM: true
+            actionOnMissing: 'warn'
+            keepToken: false
+            actionOnNoFiles: 'continue'
+            enableTransforms: false
+            enableRecursion: false
+            useLegacyPattern: false
+            enableTelemetry: true
+              
+        - task: TerraformTaskV4@4
+          displayName: Terrafrom init
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            backendServiceArm: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
+            backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
+            backendAzureRmStorageAccountName: 'clearlyearthterraform'
+            backendAzureRmContainerName: 'clearlyterraformstate'
+            backendAzureRmKey: 'terraform.state'
+        - task: TerraformTaskV4@4
+          displayName: Terraform Validate
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+        - task: TerraformTaskV4@4
+          displayName: Terraform Plan
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            environmentServiceNameAzureRM: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'terraform artifact'
+            publishLocation: 'pipeline'
