@@ -35,6 +35,8 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_stage" {
         "Purge",
         "Restore",
     ]
+    /*
+    
     certificate_permissions = [
       "Create",
       "Delete",
@@ -50,6 +52,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_stage" {
       "Purge",
       "Update",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 
     depends_on = [
@@ -76,6 +79,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policyTerraform_sta
         "Purge",
         "Restore",
     ]
+    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -91,12 +95,13 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policyTerraform_sta
       "Purge",
       "Update",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.clearly_keyvault_stage
 ]
 }
-/*
+
 
 # Access Policy For AKS User Identity for Keyvault Secrets
 resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_managedidentity_stage" {
@@ -117,6 +122,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_managedident
         "Purge",
         "Restore",
     ]
+    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -132,6 +138,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_managedident
       "Purge",
       "Update",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.clearly_keyvault_stage
@@ -157,6 +164,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_keyvaultadmi
         "Purge",
         "Restore",
     ]
+    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -172,13 +180,14 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_keyvaultadmi
       "Purge",
       "Update",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.clearly_keyvault_stage
 ]
 }
 
-
+/*
 # attach the certificate to the Keyvault for application gateway
 resource "azurerm_key_vault_certificate" "clearly_certificate_stage" {
   count                       = local.env == "main" ? 1 : 0
