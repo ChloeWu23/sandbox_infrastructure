@@ -33,6 +33,8 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy" {
         "Purge",
         "Restore",
     ]
+    /* comment out certificate permissions
+    
     certificate_permissions = [
       "Create",
       "Delete",
@@ -47,9 +49,13 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy" {
       "SetIssuers",
       "Update",
     ]
-    tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 
+    */
+    tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
+    
 }
+
+
 # Access Policy For Terraform Service Principal
 resource "azurerm_key_vault_access_policy" "clearly_keyvault_policyTerraform" {
     key_vault_id            = "${azurerm_key_vault.clearly_keyvault.id}"
@@ -68,6 +74,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policyTerraform" {
         "Purge",
         "Restore",
     ]
+    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -83,6 +90,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policyTerraform" {
       "Update",
       "Purge",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.clearly_keyvault
@@ -106,6 +114,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_managedident
         "Purge",
         "Restore",
     ]
+    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -121,6 +130,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_managedident
       "Update",
       "Purge",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.clearly_keyvault
@@ -145,6 +155,7 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_keyvaultadmi
         "Purge",
         "Restore",
     ]
+    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -160,11 +171,13 @@ resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_keyvaultadmi
       "Purge",
       "Update",
     ]
+    */
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.clearly_keyvault
 ]
 }
+
 # attach the secrets to the keyvault 
 resource "azurerm_key_vault_secret" "secret" {
   count = length(var.keyvaultsecrets)
@@ -181,7 +194,7 @@ resource "azurerm_key_vault_secret" "secret" {
     # azurerm_key_vault_access_policy.clearly_keyvault_policy_managedidentity
   ]
 }
-
+/* Commented out due to not deploying with certificates
 # attach the certificate to the Keyvault for application gateway
 resource "azurerm_key_vault_certificate" "clearly_certificate_dev" {
   count        = local.isDev
@@ -229,3 +242,4 @@ resource "azurerm_key_vault_certificate" "clearly_certificate_main" {
     # azurerm_key_vault_access_policy.clearly_keyvault_policy_managedidentity
   ]
 }
+*/

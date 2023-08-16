@@ -96,6 +96,8 @@ depends_on = [
     azurerm_key_vault.clearly_keyvault_stage
 ]
 }
+/*
+
 # Access Policy For AKS User Identity for Keyvault Secrets
 resource "azurerm_key_vault_access_policy" "clearly_keyvault_policy_managedidentity_stage" {
    count                       = local.env == "main" ? 1 : 0
@@ -202,3 +204,4 @@ resource "azurerm_key_vault_certificate" "clearly_certificate_stage" {
   ]
 }
 
+*/
