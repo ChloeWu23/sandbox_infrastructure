@@ -1,5 +1,3 @@
-
-
 # variable "development_aws_account_id" {}
 # variable "development_aws_role_arn" {}
 # variable "production_aws_account_id" {}
@@ -73,7 +71,7 @@ variable "keyvaultAdminSP_group_ObjectID" {
 # variable "clearly_ssl_certificate" {
 #   default = "~/.ssh/clearly-dev.pfx"
 # }
-
+/*
 variable "clearly_dev_certification_password" {
   default = "#{clearly_dev_certification_password}#"
 }
@@ -95,3 +93,4 @@ variable "keyvault_stage_certificate" {
 variable "keyvault_dev_certificate" {
   default = "clearlydevcert"
 }
+*/
