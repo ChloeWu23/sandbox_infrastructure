@@ -1,6 +1,6 @@
 locals {
   env           = terraform.workspace
-  productprefix = "clearly-earth"
+  productprefix = "cadt"
 
 
   #BEGIN: Workspace Environments (index is based on workspace selected)

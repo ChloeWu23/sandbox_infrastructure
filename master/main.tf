@@ -1,5 +1,5 @@
 # Resource to create an Azure Resource Group with the name and location defined in the variables.
-resource "azurerm_resource_group" "clearly-earth-rg" {
+resource "azurerm_resource_group" "cadt-rg" {
   location = var.region
   name     = "${local.productprefix}-${local.environment}-${var.region}-rg-master"
   tags                = {
