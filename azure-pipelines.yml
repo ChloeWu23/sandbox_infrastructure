@@ -38,16 +38,7 @@ stages:
             #secureFile: 'clearly-main.pfx'
             #retryCount: 8
 
-        
-        - task: Bash@3
-          inputs:
-            targetType: 'inline'
-            script: |
-              cd $(System.DefaultWorkingDirectory)
-              terraform init -reconfigure
-              
-
-         
+           
         #- task: CopyFiles@2
           #inputs:
             #SourceFolder: '$(Agent.TempDirectory)'
@@ -104,6 +95,13 @@ stages:
             enableRecursion: false
             useLegacyPattern: false
             enableTelemetry: true
+              
+         - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              cd $(System.DefaultWorkingDirectory)
+              terraform init -reconfigure
               
         #- task: TerraformTaskV4@4
           #displayName: Terrafrom init
