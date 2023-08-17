@@ -121,6 +121,7 @@ stages:
             provider: 'azurerm'
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
+            backendServiceArm: 'cadt'
 
         - task: TerraformTaskV4@4
           displayName: Terraform Validate
