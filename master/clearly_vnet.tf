@@ -16,7 +16,8 @@ resource "azurerm_virtual_network" "virtual_network" {
 
 resource "azurerm_subnet" "subnet1" {
   name                 = "${local.productprefix}-subnet1-${local.environment}"
-  enforce_private_link_endpoint_network_policies = false
+  #enforce_private_link_endpoint_network_policies = false
+  private_endpoint_network_policies_enabled = true
   enforce_private_link_service_network_policies  = false
   resource_group_name  = azurerm_resource_group.clearly-earth-rg.name
   virtual_network_name = azurerm_virtual_network.virtual_network.name
