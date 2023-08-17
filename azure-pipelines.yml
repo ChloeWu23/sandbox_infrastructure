@@ -116,6 +116,13 @@ stages:
             #backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
+          displayName: Terraform Init
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+
+        - task: TerraformTaskV4@4
           displayName: Terraform Validate
           inputs:
             provider: 'azurerm'
