@@ -26,7 +26,8 @@ agent_count_min = 1
 #ssh_public_key = "#{ssh_public_key}#"
 ssh_public_key = "~/.ssh/id_rsa.pub"
 
-log_analytics_workspace_sku = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
+#log_analytics_workspace_sku = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
+log_analytics_workspace_sku = "PerGB2018"
 
 #aks_service_principal_object_id = "#{aks_service_principal_object_id}#"
 aks_service_principal_object_id = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
@@ -42,7 +43,8 @@ aks_enable_rbac = true
 
 terraformSP = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
 
-keyvaultAdminSP_group_ObjectID = "#{keyvaultAdminSP_group_ObjectID}#"
+#keyvaultAdminSP_group_ObjectID = "#{keyvaultAdminSP_group_ObjectID}#"
+keyvaultAdminSP_group_ObjectID = "83a394cd-7b99-4780-abb6-ad6ee02c6957"
 
 
 keyvaultsecrets = {
