@@ -17,7 +17,8 @@ stages:
          vmImage: ubuntu-latest
 
         steps: 
-        - checkout: git://clearly-earth/Sandbox/sandbox_infrastructure
+        #- checkout: git://clearly-earth/Sandbox/sandbox_infrastructure
+        - checkout: self
         
         #- task: DownloadSecureFile@1
           #name: sshfile
