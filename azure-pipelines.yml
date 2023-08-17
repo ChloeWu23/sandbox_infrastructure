@@ -105,13 +105,13 @@ stages:
             useLegacyPattern: false
             enableTelemetry: true
               
-        - task: TerraformTaskV4@4
-          displayName: Terrafrom init
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            workingDirectory: $(System.DefaultWorkingDirectory)/master
-            backendServiceArm: 'cadt'
+        #- task: TerraformTaskV4@4
+          #displayName: Terrafrom init
+          #inputs:
+            #provider: 'azurerm'
+            #command: 'init'
+            #workingDirectory: $(System.DefaultWorkingDirectory)/master
+            #backendServiceArm: 'cadt'
             #backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
             #backendAzureRmStorageAccountName: 'clearlyearthterraform'
             #backendAzureRmContainerName: 'clearlyterraformstate'
