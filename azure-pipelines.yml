@@ -122,6 +122,10 @@ stages:
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             backendServiceArm: 'cadt'
+            backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
+            backendAzureRmStorageAccountName: 'clearlyearthterraform'
+            backendAzureRmContainerName: 'clearlyterraformstate'
+            backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
           displayName: Terraform Validate
