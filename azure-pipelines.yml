@@ -44,10 +44,7 @@ stages:
             targetType: 'inline'
             script: |
               cd $(System.DefaultWorkingDirectory)
-              terraform init -migrate-state
-              pwd
-              ls
-              
+              terraform init -reconfigure
               
 
          
