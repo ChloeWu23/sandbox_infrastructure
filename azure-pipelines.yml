@@ -44,8 +44,7 @@ stages:
             script: |
               pwd
               ls
-              #cd '$(Build.SourcesDirectory)/master/.ssh'
-              #ls
+              
 
          
         #- task: CopyFiles@2
@@ -111,7 +110,7 @@ stages:
             provider: 'azurerm'
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
-            backendServiceArm: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
+            backendServiceArm: 'cadt'
             backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
             backendAzureRmStorageAccountName: 'clearlyearthterraform'
             backendAzureRmContainerName: 'clearlyterraformstate'
@@ -130,8 +129,8 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
-            environmentServiceNameAzureRM: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
-            
+            environmentServiceNameAzureRM: 'cadt'
+
         - task: PublishPipelineArtifact@1
           inputs:
             targetPath: '$(Pipeline.Workspace)'
