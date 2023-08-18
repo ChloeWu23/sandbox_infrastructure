@@ -1,9 +1,9 @@
 terraform {
   required_version = ">=1.0"
   backend "azurerm" {
-    resource_group_name                = "clearly-earth-terraform-backup"
-    storage_account_name               = "clearlyearthterraform"
-    container_name                     = "clearlyterraformstate"
+    resource_group_name                = "sandbox-cadt-terraform-backup"
+    storage_account_name               = "sandboxcadtterraform"
+    container_name                     = "sandboxcadtterraformstate"
     key                                = "terraform.state"
   }
 
