@@ -18,7 +18,7 @@ resource "azurerm_kubernetes_cluster" "sandbox_aks" {
     min_count = var.agent_count_min
     max_count = var.agent_count_max
     enable_auto_scaling = true
-    vnet_subnet_id = azurerm_subnet.sandbox_cadt_subnet1.id
+    vnet_subnet_id = azurerm_subnet.subnet1.id
     
     # orchestrator_version = data.azurerm_kubernetes_service_versions.current.latest_version (something to consider at some point)
     # availability_zones   = [1, 2, 3]  (something to consider later)
@@ -53,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "sandbox_aks" {
   }
  
   # Specifies dependencies for the cluster
-  depends_on = [azurerm_virtual_network.sandbox_cadt_virtual_network, azurerm_application_gateway.sandbox_cadt_appgw]
+  depends_on = [azurerm_virtual_network.virtual_network, azurerm_application_gateway.appgw]
   
   key_vault_secrets_provider {
            secret_rotation_enabled  = false 

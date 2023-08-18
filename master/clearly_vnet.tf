@@ -2,9 +2,9 @@
 resource "azurerm_virtual_network" "virtual_network" {
   address_space = local.vnetaddressrange
   dns_servers   = []
-  location            = azurerm_resource_group.clearly-earth-rg.location
+  location            = azurerm_resource_group.sandbox-cadt.location
   name                = "${local.productprefix}-vnet-${local.environment}"
-  resource_group_name = azurerm_resource_group.clearly-earth-rg.name
+  resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
 
   timeouts {}
   # Add tags to the virtual network
@@ -19,7 +19,7 @@ resource "azurerm_subnet" "subnet1" {
   #enforce_private_link_endpoint_network_policies = false
   private_endpoint_network_policies_enabled = true
   enforce_private_link_service_network_policies  = false
-  resource_group_name  = azurerm_resource_group.clearly-earth-rg.name
+  resource_group_name  = azurerm_resource_group.sandbox-cadt-rg.name
   virtual_network_name = azurerm_virtual_network.virtual_network.name
   service_endpoints    = []
 
@@ -33,7 +33,7 @@ resource "azurerm_subnet" "appgwsubnet" {
   name                 = "${local.productprefix}-appgwsubnet-${local.environment}"
   enforce_private_link_endpoint_network_policies = false
   enforce_private_link_service_network_policies  = false
-  resource_group_name  = azurerm_resource_group.clearly-earth-rg.name
+  resource_group_name  = azurerm_resource_group.sandbox-cadt-rg.name
   virtual_network_name = azurerm_virtual_network.virtual_network.name
   service_endpoints    = []
 

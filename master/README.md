@@ -1,6 +1,6 @@
 # Introduction 
 
-The Terraform creates the complete Infrastrcuture for Clearly Earth for any Environment we want to create . 
+The Terraform creates the complete Infrastrcuture for Sandbox CADT for any Environment we want to create . 
 The Terraform Code comprises of following component
 
 1) Vnet 
