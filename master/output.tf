@@ -34,13 +34,3 @@ output "cluster_kubernetes_version" {
   value = azurerm_kubernetes_cluster.sandbox_aks.kubernetes_version
 }
 
-# PBV Output ACR info
-# https://github.com/avinor/terraform-azurerm-container-registry/blob/master/outputs.tf
-# output "azurerm_container_registry_id" {
-#   description = "The Container Registry ID"
-#   value       = azurerm_container_registry.clearly_acr.id
-# }
-# output "azurerm_container_registry_login_server" {
-#   description = "The URL that can be used to log into the container registry."
-#   value       = azurerm_container_registry.clearly_acr.login_server
-# }

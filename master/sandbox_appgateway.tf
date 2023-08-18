@@ -1,8 +1,8 @@
 # Create user assigned identity for the application gateway and KeyVault
 # User Assigned Identities 
 resource "azurerm_user_assigned_identity" "userIdentity" {
-  resource_group_name = azurerm_resource_group.clearly-earth-rg.name
-  location            = azurerm_resource_group.clearly-earth-rg.location
+  resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
+  location            = azurerm_resource_group.sandbox-cadt-rg.location
 
   name = "${local.productprefix}-mi-${local.environment}"
 
@@ -17,8 +17,8 @@ resource "azurerm_user_assigned_identity" "userIdentity" {
 # Create public IP address for the application gateway
 resource "azurerm_public_ip" "public_ip" {
   name                = "${local.productprefix}_publicIp_${local.envprefix}"
-  location            = azurerm_resource_group.clearly-earth-rg.location
-  resource_group_name = azurerm_resource_group.clearly-earth-rg.name
+  location            = azurerm_resource_group.sandbox-cadt-rg.location
+  resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
 
@@ -29,10 +29,10 @@ resource "azurerm_public_ip" "public_ip" {
 }
 
 # Create application gateway with backend pool, HTTP settings, listener, and routing rule
-resource "azurerm_application_gateway" "clearly_appgw" {
+resource "azurerm_application_gateway" "sandbox_appgw" {
   name                = "${local.productprefix}_appgw_${local.envprefix}"
-  resource_group_name = azurerm_resource_group.clearly-earth-rg.name
-  location            = azurerm_resource_group.clearly-earth-rg.location
+  resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
+  location            = azurerm_resource_group.sandbox-cadt-rg.location
 
   sku {
     name     = "Standard_v2"
@@ -116,17 +116,17 @@ resource "azurerm_role_assignment" "ra2" {
 
 # Assign "Contributor" role to the user assigned identity for the application gateway
 resource "azurerm_role_assignment" "ra3" {
-  scope                = azurerm_application_gateway.clearly_appgw.id
+  scope                = azurerm_application_gateway.sandbox_appgw.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.userIdentity.principal_id
-  depends_on           = [azurerm_user_assigned_identity.userIdentity, azurerm_application_gateway.clearly_appgw]
+  depends_on           = [azurerm_user_assigned_identity.userIdentity, azurerm_application_gateway.sandbox_appgw]
 }
 
 # Assign "Reader" role to the user assigned identity for the resource group
 resource "azurerm_role_assignment" "ra4" {
-  scope                = azurerm_resource_group.clearly-earth-rg.id
+  scope                = azurerm_resource_group.sandbox-cadt-rg.id
   role_definition_name = "Reader"
   principal_id         = azurerm_user_assigned_identity.userIdentity.principal_id
-  depends_on           = [azurerm_user_assigned_identity.userIdentity, azurerm_application_gateway.clearly_appgw]
+  depends_on           = [azurerm_user_assigned_identity.userIdentity, azurerm_application_gateway.sandbox_appgw]
 }
 

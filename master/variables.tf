@@ -68,29 +68,29 @@ variable "keyvaultAdminSP_group_ObjectID" {
     description = "Object ID of the service principal for Keyvaults admins"
 }
 
-# variable "clearly_ssl_certificate" {
-#   default = "~/.ssh/clearly-dev.pfx"
+# variable "sandbox_ssl_certificate" {
+#   default = "~/.ssh/sandbox-dev.pfx"
 # }
 /*
-variable "clearly_dev_certification_password" {
-  default = "#{clearly_dev_certification_password}#"
+variable "sandbox_dev_certification_password" {
+  default = "#{sandbox_dev_certification_password}#"
 }
 
-variable "clearly_stage_certification_password" {
-  default = "#{clearly_stage_certification_password}#"
+variable "sandbox_stage_certification_password" {
+  default = "#{sandbox_stage_certification_password}#"
 }
 
-variable "clearly_main_certification_password" {
-  default = "#{clearly_main_certification_password}#"
+variable "sandbox_main_certification_password" {
+  default = "#{sandbox_main_certification_password}#"
 }
 
 variable "keyvault_main_certificate" {
-  default = "clearlymaincert"
+  default = "sandboxmaincert"
 }
 variable "keyvault_stage_certificate" {
-  default = "clearlystagecert"
+  default = "sandboxstagecert"
 }
 variable "keyvault_dev_certificate" {
-  default = "clearlydevcert"
+  default = "sandboxdevcert"
 }
 */
