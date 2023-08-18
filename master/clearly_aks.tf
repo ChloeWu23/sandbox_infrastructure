@@ -1,8 +1,8 @@
 # Creates an Azure Kubernetes Service cluster
-resource "azurerm_kubernetes_cluster" "clearly_aks" {
-  location            = azurerm_resource_group.clearly-earth-rg.location
+resource "azurerm_kubernetes_cluster" "sandbox_aks" {
+  location            = azurerm_resource_group.sandbox-cadt-rg.location
   name                = "${local.productprefix}-aks-${local.environment}-master"
-  resource_group_name = azurerm_resource_group.clearly-earth-rg.name
+  resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
   dns_prefix          = "${local.productprefix}-aks-${local.environment}"
   node_resource_group = "${local.productprefix}-aks-${local.environment}-nrg"
   oidc_issuer_enabled = true
