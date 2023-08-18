@@ -3,7 +3,7 @@ terraform {
   backend "azurerm" {
     resource_group_name                = "sandbox-cadt-terraform-backup"
     storage_account_name               = "sandboxcadtterraform"
-    container_name                     = "sandboxcadtterraformstate"
+    container_name                     = "sandboxterraformstate"
     key                                = "terraform.state"
   }
 
