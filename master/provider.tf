@@ -1,3 +1,4 @@
+#here related to backend resource_group configuration
 terraform {
   required_version = ">=1.0"
   backend "azurerm" {
