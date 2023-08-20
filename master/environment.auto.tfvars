@@ -30,20 +30,22 @@ ssh_public_key = "~/.ssh/id_rsa.pub"
 log_analytics_workspace_sku = "PerGB2018"
 
 #aks_service_principal_object_id = "#{aks_service_principal_object_id}#"
-aks_service_principal_object_id = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
+aks_service_principal_object_id = "810791c4-b184-48dd-9b0d-52ac8784f071"
 
 #aks_service_principal_client_secret        = "#{aks_service_principal_client_secret}#"
-aks_service_principal_client_secret        = "dCw8Q~PvbCAjUrUp_R6huGaAUOGCykW3a2bQ2dvZ"
+aks_service_principal_client_secret        = "6ab7d0f7-7fca-475a-9d32-9faaf16bf95f"
 
 #aks_service_principal_app_id =  "#{aks_service_principal_app_id}#"
-aks_service_principal_app_id =  "61659873-b2bf-49fd-879a-59ab4633a67b"
+aks_service_principal_app_id =  "bdb8dba1-244a-4220-bcf4-a5fd26d6f28f"
 
 #aks_enable_rbac = "#{aks_enable_rbac}#"
 aks_enable_rbac = true
 
+#not sure about this one
 terraformSP = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
 
 #keyvaultAdminSP_group_ObjectID = "#{keyvaultAdminSP_group_ObjectID}#"
+#this value put devOp group object ID
 keyvaultAdminSP_group_ObjectID = "83a394cd-7b99-4780-abb6-ad6ee02c6957"
 
 
