@@ -122,9 +122,9 @@ stages:
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             backendServiceArm: 'cadt'
-            backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
-            backendAzureRmStorageAccountName: 'clearlyearthterraform'
-            backendAzureRmContainerName: 'clearlyterraformstate'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
             backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
