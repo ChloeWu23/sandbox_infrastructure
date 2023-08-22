@@ -45,6 +45,9 @@ stages:
             SourceFolder: '$(Agent.TempDirectory)'
             Contents: 'id_rsa.pub'
             TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
+            
+        - script: echo "##vso[task.setvariable variable=ssh_public_key]$(Build.SourcesDirectory)/master/.ssh/id_rsa.pub"
+        
         
         # - task: CopyFiles@2
         #   inputs:
