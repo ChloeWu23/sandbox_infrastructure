@@ -45,25 +45,11 @@ stages:
             SourceFolder: '$(Agent.TempDirectory)'
             Contents: 'id_rsa.pub'
             TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
-            
+        - script: ls $(Build.SourcesDirectory)/master/.ssh
         - script: echo "##vso[task.setvariable variable=ssh_public_key]$(Build.SourcesDirectory)/master/.ssh/id_rsa.pub"
+        - script: echo "The value of ssh_public_key variable is $(ssh_public_key)"
         
-        
-        # - task: CopyFiles@2
-        #   inputs:
-        #     SourceFolder: '$(Agent.TempDirectory)'
-        #     Contents: 'clearly-dev.pfx'
-        #     TargetFolder: '$(Build.SourcesDirectory)/master'
-        # - task: CopyFiles@2
-        #   inputs:
-        #     SourceFolder: '$(Agent.TempDirectory)'
-        #     Contents: 'clearly-stage.pfx'
-        #     TargetFolder: '$(Build.SourcesDirectory)/master'
-        # - task: CopyFiles@2
-        #   inputs:
-        #     SourceFolder: '$(Agent.TempDirectory)'
-        #     Contents: 'clearly-main.pfx'
-            # TargetFolder: '$(Build.SourcesDirectory)/master'
+      
         
         - task: Bash@3
           inputs:
@@ -140,6 +126,8 @@ stages:
 
         - task: TerraformTaskV4@4
           displayName: Terraform Plan
+          env:
+            TF_VAR_ssh_public_key: $(ssh_public_key)
           inputs:
             provider: 'azurerm'
             command: 'plan'

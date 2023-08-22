@@ -24,7 +24,7 @@ agent_count_max = 3
 agent_count_min = 1
 
 #ssh_public_key = "#{ssh_public_key}#"
-ssh_public_key = "~/.ssh/id_rsa.pub"
+
 
 #log_analytics_workspace_sku = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
 log_analytics_workspace_sku = "PerGB2018"
