@@ -79,30 +79,30 @@ stages:
           inputs:
            terraformVersion: 'latest'
 
-        - task: replacetokens@5
-          displayName: 'Replace tokens in **/*.tfvars **/*.tf '
-          inputs:
-            rootDirectory: '$(System.DefaultWorkingDirectory)/master'
-            targetFiles: |
-              **/*.tfvars
-              **/*.tf
-            encoding: 'auto'
-            tokenPattern: 'default'
-            writeBOM: true
-            actionOnMissing: 'warn'
-            keepToken: false
-            actionOnNoFiles: 'continue'
-            enableTransforms: false
-            enableRecursion: false
-            useLegacyPattern: false
-            enableTelemetry: true
+        # - task: replacetokens@5
+        #   displayName: 'Replace tokens in **/*.tfvars **/*.tf '
+        #   inputs:
+        #     rootDirectory: '$(System.DefaultWorkingDirectory)/master'
+        #     targetFiles: |
+        #       **/*.tfvars
+        #       **/*.tf
+        #     encoding: 'auto'
+        #     tokenPattern: 'default'
+        #     writeBOM: true
+        #     actionOnMissing: 'warn'
+        #     keepToken: false
+        #     actionOnNoFiles: 'continue'
+        #     enableTransforms: false
+        #     enableRecursion: false
+        #     useLegacyPattern: false
+        #     enableTelemetry: true
               
-        - task: Bash@3
-          inputs:
-            targetType: 'inline'
-            script: |
-              cd $(System.DefaultWorkingDirectory)
-              terraform init -reconfigure
+        # - task: Bash@3
+        #   inputs:
+        #     targetType: 'inline'
+        #     script: |
+        #       cd $(System.DefaultWorkingDirectory)
+        #       terraform init -reconfigure
               
         # - task: TerraformTaskV4@4
         #   displayName: Terrafrom init
@@ -122,7 +122,7 @@ stages:
             provider: 'azurerm'
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
-            backendServiceArm: 'cadt'
+            backendServiceArm: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
             backendAzureRmResourceGroupName: 'sandbox-cadt-dev-northeurope-rg-master'
             backendAzureRmStorageAccountName: 'sandboxcadtterraform'
             backendAzureRmContainerName: 'sandboxterraformstate'
