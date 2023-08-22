@@ -48,7 +48,7 @@ terraformSP = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
 
 # keyvaultAdminSP_group_ObjectID = "#{keyvaultAdminSP_group_ObjectID}#"
 #this value put devOp group object ID
-#keyvaultAdminSP_group_ObjectID = "83a394cd-7b99-4780-abb6-ad6ee02c6957"
+keyvaultAdminSP_group_ObjectID = "83a394cd-7b99-4780-abb6-ad6ee02c6957"
 
 
 # keyvaultsecrets = {
