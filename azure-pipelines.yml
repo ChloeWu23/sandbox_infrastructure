@@ -62,18 +62,18 @@ stages:
             Contents: 'clearly-main.pfx'
             TargetFolder: '$(Build.SourcesDirectory)/master'
         
-        #- task: Bash@3
-          #inputs:
-            #targetType: 'inline'
-            #script: |
-              #pwd
-              #ls
-              #cd '$(Build.SourcesDirectory)/master'
-              #pwd
-              #ls
-              #cd '$(Build.SourcesDirectory)/master/.ssh'
-              #pwd
-              #ls
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              pwd
+              ls
+              cd '$(Build.SourcesDirectory)/master'
+              pwd
+              ls
+              cd '$(Build.SourcesDirectory)/master/.ssh'
+              pwd
+              ls
          
         - task: TerraformInstaller@1
           inputs:
@@ -104,17 +104,17 @@ stages:
               cd $(System.DefaultWorkingDirectory)
               terraform init -reconfigure
               
-        #- task: TerraformTaskV4@4
-          #displayName: Terrafrom init
-          #inputs:
-            #provider: 'azurerm'
-            #command: 'init'
-            #workingDirectory: $(System.DefaultWorkingDirectory)/master
-            #backendServiceArm: 'cadt'
-            #backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
-            #backendAzureRmStorageAccountName: 'clearlyearthterraform'
-            #backendAzureRmContainerName: 'clearlyterraformstate'
-            #backendAzureRmKey: 'terraform.state'
+        # - task: TerraformTaskV4@4
+        #   displayName: Terrafrom init
+        #   inputs:
+        #     provider: 'azurerm'
+        #     command: 'init'
+        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
+        #     backendServiceArm: 'cadt'
+        #     backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
+        #     backendAzureRmStorageAccountName: 'clearlyearthterraform'
+        #     backendAzureRmContainerName: 'clearlyterraformstate'
+        #     backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
           displayName: Terraform Init

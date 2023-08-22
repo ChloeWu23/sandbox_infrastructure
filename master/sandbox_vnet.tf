@@ -2,7 +2,7 @@
 resource "azurerm_virtual_network" "virtual_network" {
   address_space = local.vnetaddressrange
   dns_servers   = []
-  location            = azurerm_resource_group.sandbox-cadt.location
+  location            = azurerm_resource_group.sandbox-cadt-rg.location
   name                = "${local.productprefix}-vnet-${local.environment}"
   resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
 

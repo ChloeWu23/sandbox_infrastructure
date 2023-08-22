@@ -53,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "sandbox_aks" {
   }
  
   # Specifies dependencies for the cluster
-  depends_on = [azurerm_virtual_network.virtual_network, azurerm_application_gateway.appgw]
+  depends_on = [azurerm_virtual_network.virtual_network, azurerm_application_gateway.sandbox_appgw]
   
   key_vault_secrets_provider {
            secret_rotation_enabled  = false 
