@@ -26,18 +26,18 @@ stages:
             secureFile: 'id_rsa.pub'
             retryCount: 8
 
-        - task: DownloadSecureFile@1
-          inputs:
-            secureFile: 'clearly-dev.pfx'
-            retryCount: 8
-        - task: DownloadSecureFile@1
-          inputs:
-            secureFile: 'clearly-stage.pfx'
-            retryCount: 8
-        - task: DownloadSecureFile@1
-          inputs:
-            secureFile: 'clearly-main.pfx'
-            retryCount: 8
+        # - task: DownloadSecureFile@1
+        #   inputs:
+        #     secureFile: 'clearly-dev.pfx'
+        #     retryCount: 8
+        # - task: DownloadSecureFile@1
+        #   inputs:
+        #     secureFile: 'clearly-stage.pfx'
+        #     retryCount: 8
+        # - task: DownloadSecureFile@1
+        #   inputs:
+        #     secureFile: 'clearly-main.pfx'
+        #     retryCount: 8
 
            
         - task: CopyFiles@2
@@ -46,21 +46,21 @@ stages:
             Contents: 'id_rsa.pub'
             TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
         
-        - task: CopyFiles@2
-          inputs:
-            SourceFolder: '$(Agent.TempDirectory)'
-            Contents: 'clearly-dev.pfx'
-            TargetFolder: '$(Build.SourcesDirectory)/master'
-        - task: CopyFiles@2
-          inputs:
-            SourceFolder: '$(Agent.TempDirectory)'
-            Contents: 'clearly-stage.pfx'
-            TargetFolder: '$(Build.SourcesDirectory)/master'
-        - task: CopyFiles@2
-          inputs:
-            SourceFolder: '$(Agent.TempDirectory)'
-            Contents: 'clearly-main.pfx'
-            TargetFolder: '$(Build.SourcesDirectory)/master'
+        # - task: CopyFiles@2
+        #   inputs:
+        #     SourceFolder: '$(Agent.TempDirectory)'
+        #     Contents: 'clearly-dev.pfx'
+        #     TargetFolder: '$(Build.SourcesDirectory)/master'
+        # - task: CopyFiles@2
+        #   inputs:
+        #     SourceFolder: '$(Agent.TempDirectory)'
+        #     Contents: 'clearly-stage.pfx'
+        #     TargetFolder: '$(Build.SourcesDirectory)/master'
+        # - task: CopyFiles@2
+        #   inputs:
+        #     SourceFolder: '$(Agent.TempDirectory)'
+        #     Contents: 'clearly-main.pfx'
+            # TargetFolder: '$(Build.SourcesDirectory)/master'
         
         - task: Bash@3
           inputs:
@@ -123,7 +123,7 @@ stages:
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             backendServiceArm: 'cadt'
-            backendAzureRmResourceGroupName: 'sandbox-cadt-dev-north'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-dev-northeurope-rg-master'
             backendAzureRmStorageAccountName: 'sandboxcadtterraform'
             backendAzureRmContainerName: 'sandboxterraformstate'
             backendAzureRmKey: 'terraform.state'
