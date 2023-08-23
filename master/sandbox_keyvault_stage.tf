@@ -1,3 +1,5 @@
+/*
+
 # Create Azure Key Vault
 resource "azurerm_key_vault" "sandbox_keyvault_stage" {
   count                       = local.env == "main" ? 1 : 0
@@ -53,6 +55,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_stage" {
       "Update",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 
     depends_on = [
@@ -96,6 +99,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policyTerraform_sta
       "Update",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault_stage
@@ -139,6 +143,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_managedident
       "Update",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault_stage
@@ -181,6 +186,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_keyvaultadmi
       "Update",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault_stage
