@@ -126,6 +126,7 @@ stages:
             customCommand: 'workspace'
             commandOptions: 'select develop'
             outputTo: 'console'
+            environmentServiceNameAzureRM: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
         - task: TerraformTaskV4@4
           displayName: Terraform Validate
           inputs:
