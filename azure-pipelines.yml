@@ -112,7 +112,7 @@ stages:
             command: 'init'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             backendServiceArm: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
-            backendAzureRmResourceGroupName: 'sandbox-cadt-dev-northeurope-rg-master'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
             backendAzureRmStorageAccountName: 'sandboxcadtterraform'
             backendAzureRmContainerName: 'sandboxterraformstate'
             backendAzureRmKey: 'terraform.state'

@@ -2,7 +2,7 @@
 terraform {
   required_version = ">=1.0"
   backend "azurerm" {
-    resource_group_name                = "sandbox-cadt-dev-northeurope-rg-master"
+    resource_group_name                = "sandbox-cadt-terraform-backup"
     storage_account_name               = "sandboxcadtterraform"
     container_name                     = "sandboxterraformstate"
     key                                = "terraform.state"
