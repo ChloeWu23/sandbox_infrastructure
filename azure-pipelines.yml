@@ -126,7 +126,7 @@ stages:
             customCommand: 'workspace'
             commandOptions: 'select develop'
             outputTo: 'console'
-            environmentServiceNameAzureRM: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
+            environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
         - task: TerraformTaskV4@4
           displayName: Terraform Validate
           inputs:
@@ -142,17 +142,17 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
-            environmentServiceNameAzureRM: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
-
-        - task: TerraformTaskV4@4
-          displayName: Terraform Apply
-          env:
-            TF_VAR_ssh_public_key: $(ssh_public_key)
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            workingDirectory: $(System.DefaultWorkingDirectory)/master
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+
+        # - task: TerraformTaskV4@4
+        #   displayName: Terraform Apply
+        #   env:
+        #     TF_VAR_ssh_public_key: $(ssh_public_key)
+        #   inputs:
+        #     provider: 'azurerm'
+        #     command: 'apply'
+        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
+        #     environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
 
         
 
