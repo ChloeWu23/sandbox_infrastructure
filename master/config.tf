@@ -17,17 +17,17 @@ locals {
   vnet_address_range = {
      "default" = ["172.10.0.0/16"]
      "develop" = ["172.20.0.0/16"]
-     "main"    = ["172.40.0.0/16"] 
+     "main"    = ["172.30.0.0/16"] 
   }
   k8s_subnet_range = {
      "default" = ["172.10.0.0/22"]
      "develop" = ["172.20.0.0/22"]
-     "main"    = ["172.40.0.0/22"] 
+     "main"    = ["172.30.0.0/22"] 
   }
   appgw_subnet_range = {
      "default" = ["172.10.16.0/20"]
      "develop" = ["172.20.16.0/20"]
-     "main"    = ["172.40.16.0/20"] 
+     "main"    = ["172.30.16.0/20"] 
   }
  
   #END: Workspace Environments

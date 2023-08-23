@@ -1,6 +1,6 @@
 # Define an Azure Container Registry resource with a premium SKU, named based on environment
 resource "azurerm_container_registry" "sandbox_acr" {
-  name                = "sandboxACR${local.environment}"
+  name                = "sandboxcadtACR${local.environment}"
   resource_group_name = azurerm_resource_group.sandbox-cadt-rg.name
   location            = azurerm_resource_group.sandbox-cadt-rg.location
   sku                 = "Premium"

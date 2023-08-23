@@ -1,4 +1,5 @@
 # Create Azure Key Vault
+/*
 resource "azurerm_key_vault" "sandbox_keyvault" {
   name                        = "${local.productprefix}-kv-${local.environment}"
   location                    = azurerm_resource_group.sandbox-cadt-rg.location
@@ -51,6 +52,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy" {
     ]
 
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
     
 }
@@ -91,6 +93,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policyTerraform" {
       "Purge",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault
@@ -131,6 +134,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_managedident
       "Purge",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault
@@ -172,6 +176,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_keyvaultadmi
       "Update",
     ]
     */
+    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault
