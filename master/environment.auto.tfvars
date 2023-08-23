@@ -42,7 +42,7 @@ aks_service_principal_app_id =  "bdb8dba1-244a-4220-bcf4-a5fd26d6f28f"
 aks_enable_rbac = true
 
 #not sure about this one
-terraformSP = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
+terraformSP = "810791c4-b184-48dd-9b0d-52ac8784f071"
 
 # terraformSP = "#{terraformSP}#"
 
