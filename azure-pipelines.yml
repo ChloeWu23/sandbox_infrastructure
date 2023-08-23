@@ -144,15 +144,15 @@ stages:
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
 
-        # - task: TerraformTaskV4@4
-        #   displayName: Terraform Apply
-        #   env:
-        #     TF_VAR_ssh_public_key: $(ssh_public_key)
-        #   inputs:
-        #     provider: 'azurerm'
-        #     command: 'apply'
-        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
-        #     environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+        - task: TerraformTaskV4@4
+          displayName: Terraform Apply
+          env:
+            TF_VAR_ssh_public_key: $(ssh_public_key)
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
 
         
 
