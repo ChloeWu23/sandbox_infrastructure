@@ -127,12 +127,21 @@ stages:
             commandOptions: 'select develop'
             outputTo: 'console'
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
+
         - task: TerraformTaskV4@4
           displayName: Terraform Validate
           inputs:
             provider: 'azurerm'
             command: 'validate'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
           displayName: Terraform Plan
@@ -143,6 +152,10 @@ stages:
             command: 'plan'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
           displayName: Terraform Destroy
@@ -153,6 +166,10 @@ stages:
             command: 'destroy'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
 
         
 
