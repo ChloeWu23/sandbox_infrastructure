@@ -145,12 +145,12 @@ stages:
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
 
         - task: TerraformTaskV4@4
-          displayName: Terraform Apply
+          displayName: Terraform Destroy
           env:
             TF_VAR_ssh_public_key: $(ssh_public_key)
           inputs:
             provider: 'azurerm'
-            command: 'apply'
+            command: 'destroy'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
 
