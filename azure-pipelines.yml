@@ -158,18 +158,33 @@ stages:
             backendAzureRmKey: 'terraform.state'
 
         - task: TerraformTaskV4@4
-          displayName: Terraform Destroy
+          displayName: Terraform Apply
           env:
             TF_VAR_ssh_public_key: $(ssh_public_key)
           inputs:
             provider: 'azurerm'
-            command: 'destroy'
+            command: 'apply'
             workingDirectory: $(System.DefaultWorkingDirectory)/master
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
             backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
             backendAzureRmStorageAccountName: 'sandboxcadtterraform'
             backendAzureRmContainerName: 'sandboxterraformstate'
             backendAzureRmKey: 'terraform.state'
+        # - task: TerraformTaskV4@4
+        #   displayName: Terraform Destroy
+        #   env:
+        #     TF_VAR_ssh_public_key: $(ssh_public_key)
+        #   inputs:
+        #     provider: 'azurerm'
+        #     command: 'destroy'
+        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
+        #     environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+        #     backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+        #     backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+        #     backendAzureRmContainerName: 'sandboxterraformstate'
+        #     backendAzureRmKey: 'terraform.state'
+
+
 
         
 
