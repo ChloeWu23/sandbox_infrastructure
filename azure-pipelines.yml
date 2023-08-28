@@ -72,8 +72,25 @@ stages:
           inputs:
            terraformVersion: 'latest'
 
+        # - task: replacetokens@5
+        #   displayName: 'Replace tokens in **/*.tfvars **/*.tf '
+        #   inputs:
+        #     rootDirectory: '$(System.DefaultWorkingDirectory)/master'
+        #     targetFiles: |
+        #       **/*.tfvars
+        #       **/*.tf
+        #     encoding: 'auto'
+        #     tokenPattern: 'default'
+        #     writeBOM: true
+        #     actionOnMissing: 'warn'
+        #     keepToken: false
+        #     actionOnNoFiles: 'continue'
+        #     enableTransforms: false
+        #     enableRecursion: false
+        #     useLegacyPattern: false
+        #     enableTelemetry: true
+              
         - task: replacetokens@5
-          displayName: 'Replace tokens in **/*.tfvars **/*.tf '
           inputs:
             rootDirectory: '$(System.DefaultWorkingDirectory)/master'
             targetFiles: |
@@ -89,7 +106,6 @@ stages:
             enableRecursion: false
             useLegacyPattern: false
             enableTelemetry: true
-              
         # - task: Bash@3
         #   inputs:
         #     targetType: 'inline'
