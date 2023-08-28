@@ -21,13 +21,19 @@ agent_count_max = 3
 agent_count_min = 1
 
 log_analytics_workspace_sku = "PerGB2018"
-aks_service_principal_object_id = "#{aks_service_principal_object_id}#"
-aks_service_principal_client_secret = "#{aks_service_principal_client_secret}#"
-aks_service_principal_app_id =  "#{aks_service_principal_app_id}#"
-aks_enable_rbac = "#{aks_enable_rbac}#"
-terraformSP = "#{terraformSP}#"
-keyvaultAdminSP_group_ObjectID = "#{keyvaultAdminSP_group_ObjectID}#"
-
+# aks_service_principal_object_id = "#{aks_service_principal_object_id}#"
+aks_service_principal_object_id = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
+# aks_service_principal_client_secret        = "#{aks_service_principal_client_secret}#"
+aks_service_principal_client_secret = "dCw8Q~PvbCAjUrUp_R6huGaAUOGCykW3a2bQ2dvZ"
+# aks_service_principal_app_id =  "#{aks_service_principal_app_id}#"
+aks_service_principal_app_id =  "61659873-b2bf-49fd-879a-59ab4633a67b"
+#not sure about this one
+# aks_enable_rbac = "#{aks_enable_rbac}#"
+aks_enable_rbac = true
+# terraformSP = "#{terraformSP}#"
+terraformSP = "2ad21c7d-02ab-4aba-b1ab-afce1e5807a5"
+# keyvaultAdminSP_group_ObjectID = "#{keyvaultAdminSP_group_ObjectID}#"
+keyvaultAdminSP_group_ObjectID = "83a394cd-7b99-4780-abb6-ad6ee02c6957"
 
 # keyvaultsecrets = {
 #   
