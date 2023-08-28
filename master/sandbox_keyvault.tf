@@ -214,7 +214,7 @@ resource "azurerm_key_vault_certificate" "sandbox_certificate_dev" {
     # azurerm_key_vault_access_policy.sandbox_keyvault_policy_managedidentity
   ]
 }
-
+/*
 # attach the certificate to the Keyvault for application gateway
 resource "azurerm_key_vault_certificate" "sandbox_certificate_main" {
   count        = local.isMain
@@ -240,3 +240,4 @@ resource "azurerm_key_vault_certificate" "sandbox_certificate_main" {
     # azurerm_key_vault_access_policy.sandbox_keyvault_policy_managedidentity
   ]
 }
+*/
