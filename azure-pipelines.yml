@@ -49,19 +49,17 @@ stages:
           inputs:
             SourceFolder: '$(Agent.TempDirectory)'
             Contents: 'cadt.pfx'
-            TargetFolder: '$(Build.SourcesDirectory)/master
+            TargetFolder: '$(Build.SourcesDirectory)/master'
 
         - script: ls $(Build.SourcesDirectory)/master/.ssh
         - script: echo "##vso[task.setvariable variable=ssh_public_key]$(Build.SourcesDirectory)/master/.ssh/id_rsa.pub"
         - script: echo "The value of ssh_public_key variable is $(ssh_public_key)"
         
-      
-        
         - task: Bash@3
           inputs:
             targetType: 'inline'
             script: |
-              pwd
+              pwd 
               ls
               cd '$(Build.SourcesDirectory)/master'
               pwd
