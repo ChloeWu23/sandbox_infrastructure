@@ -26,10 +26,10 @@ stages:
             secureFile: 'id_rsa.pub'
             retryCount: 8
 
-        # - task: DownloadSecureFile@1
-        #   inputs:
-        #     secureFile: 'clearly-dev.pfx'
-        #     retryCount: 8
+        - task: DownloadSecureFile@1
+          inputs:
+            secureFile: 'cadt.pfx'
+            retryCount: 8
         # - task: DownloadSecureFile@1
         #   inputs:
         #     secureFile: 'clearly-stage.pfx'
@@ -45,6 +45,12 @@ stages:
             SourceFolder: '$(Agent.TempDirectory)'
             Contents: 'id_rsa.pub'
             TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
+         - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'cadt.pfx'
+            TargetFolder: '$(Build.SourcesDirectory)/master
+
         - script: ls $(Build.SourcesDirectory)/master/.ssh
         - script: echo "##vso[task.setvariable variable=ssh_public_key]$(Build.SourcesDirectory)/master/.ssh/id_rsa.pub"
         - script: echo "The value of ssh_public_key variable is $(ssh_public_key)"
@@ -68,23 +74,23 @@ stages:
           inputs:
            terraformVersion: 'latest'
 
-        # - task: replacetokens@5
-        #   displayName: 'Replace tokens in **/*.tfvars **/*.tf '
-        #   inputs:
-        #     rootDirectory: '$(System.DefaultWorkingDirectory)/master'
-        #     targetFiles: |
-        #       **/*.tfvars
-        #       **/*.tf
-        #     encoding: 'auto'
-        #     tokenPattern: 'default'
-        #     writeBOM: true
-        #     actionOnMissing: 'warn'
-        #     keepToken: false
-        #     actionOnNoFiles: 'continue'
-        #     enableTransforms: false
-        #     enableRecursion: false
-        #     useLegacyPattern: false
-        #     enableTelemetry: true
+        - task: replacetokens@5
+          displayName: 'Replace tokens in **/*.tfvars **/*.tf '
+          inputs:
+            rootDirectory: '$(System.DefaultWorkingDirectory)/master'
+            targetFiles: |
+              **/*.tfvars
+              **/*.tf
+            encoding: 'auto'
+            tokenPattern: 'default'
+            writeBOM: true
+            actionOnMissing: 'warn'
+            keepToken: false
+            actionOnNoFiles: 'continue'
+            enableTransforms: false
+            enableRecursion: false
+            useLegacyPattern: false
+            enableTelemetry: true
               
         # - task: Bash@3
         #   inputs:
@@ -157,19 +163,19 @@ stages:
             backendAzureRmContainerName: 'sandboxterraformstate'
             backendAzureRmKey: 'terraform.state'
 
-        - task: TerraformTaskV4@4
-          displayName: Terraform Apply
-          env:
-            TF_VAR_ssh_public_key: $(ssh_public_key)
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            workingDirectory: $(System.DefaultWorkingDirectory)/master
-            environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
-            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
-            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
-            backendAzureRmContainerName: 'sandboxterraformstate'
-            backendAzureRmKey: 'terraform.state'
+        # - task: TerraformTaskV4@4
+        #   displayName: Terraform Apply
+        #   env:
+        #     TF_VAR_ssh_public_key: $(ssh_public_key)
+        #   inputs:
+        #     provider: 'azurerm'
+        #     command: 'apply'
+        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
+        #     environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+        #     backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+        #     backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+        #     backendAzureRmContainerName: 'sandboxterraformstate'
+        #     backendAzureRmKey: 'terraform.state'
         # - task: TerraformTaskV4@4
         #   displayName: Terraform Destroy
         #   env:

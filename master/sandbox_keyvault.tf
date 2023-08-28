@@ -1,5 +1,4 @@
 # Create Azure Key Vault
-/*
 resource "azurerm_key_vault" "sandbox_keyvault" {
   name                        = "${local.productprefix}-kv-${local.environment}"
   location                    = azurerm_resource_group.sandbox-cadt-rg.location
@@ -34,7 +33,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy" {
         "Purge",
         "Restore",
     ]
-    /* comment out certificate permissions
+    # /* comment out certificate permissions
     
     certificate_permissions = [
       "Create",
@@ -51,8 +50,8 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy" {
       "Update",
     ]
 
-    */
-    /*
+    # */
+
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
     
 }
@@ -76,7 +75,6 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policyTerraform" {
         "Purge",
         "Restore",
     ]
-    /*
     certificate_permissions = [
       "Create",
       "Delete",
@@ -92,8 +90,6 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policyTerraform" {
       "Update",
       "Purge",
     ]
-    */
-    /*
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault
@@ -117,7 +113,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_managedident
         "Purge",
         "Restore",
     ]
-    /*
+    
     certificate_permissions = [
       "Create",
       "Delete",
@@ -133,8 +129,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_managedident
       "Update",
       "Purge",
     ]
-    */
-    /*
+
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault
@@ -159,7 +154,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_keyvaultadmi
         "Purge",
         "Restore",
     ]
-    /*
+  
     certificate_permissions = [
       "Create",
       "Delete",
@@ -175,8 +170,7 @@ resource "azurerm_key_vault_access_policy" "sandbox_keyvault_policy_keyvaultadmi
       "Purge",
       "Update",
     ]
-    */
-    /*
+
     tenant_id               = "${data.azurerm_client_config.current.tenant_id}"
 depends_on = [
     azurerm_key_vault.sandbox_keyvault
@@ -199,7 +193,6 @@ resource "azurerm_key_vault_secret" "secret" {
     # azurerm_key_vault_access_policy.sandbox_keyvault_policy_managedidentity
   ]
 }
-/* Commented out due to not deploying with certificates
 # attach the certificate to the Keyvault for application gateway
 resource "azurerm_key_vault_certificate" "sandbox_certificate_dev" {
   count        = local.isDev
@@ -207,7 +200,7 @@ resource "azurerm_key_vault_certificate" "sandbox_certificate_dev" {
   key_vault_id = azurerm_key_vault.sandbox_keyvault.id
 
   certificate {
-    contents = filebase64("sandbox-dev.pfx")
+    contents = filebase64("cadt.pfx")
     password = var.sandbox_dev_certification_password
 
   }
@@ -247,4 +240,3 @@ resource "azurerm_key_vault_certificate" "sandbox_certificate_main" {
     # azurerm_key_vault_access_policy.sandbox_keyvault_policy_managedidentity
   ]
 }
-*/

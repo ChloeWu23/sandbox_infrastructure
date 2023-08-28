@@ -71,11 +71,13 @@ variable "keyvaultAdminSP_group_ObjectID" {
 # variable "sandbox_ssl_certificate" {
 #   default = "~/.ssh/sandbox-dev.pfx"
 # }
-/*
+variable "keyvault_dev_certificate" {
+  default = "sandboxdevcert"
+}
 variable "sandbox_dev_certification_password" {
   default = "#{sandbox_dev_certification_password}#"
 }
-
+/*
 variable "sandbox_stage_certification_password" {
   default = "#{sandbox_stage_certification_password}#"
 }
@@ -89,8 +91,5 @@ variable "keyvault_main_certificate" {
 }
 variable "keyvault_stage_certificate" {
   default = "sandboxstagecert"
-}
-variable "keyvault_dev_certificate" {
-  default = "sandboxdevcert"
 }
 */
