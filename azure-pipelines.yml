@@ -6,6 +6,8 @@
 trigger:
 - develop
 
+variables:
+- group: sandbox-infra-variable
 pool:
   vmImage: ubuntu-latest
 stages:
