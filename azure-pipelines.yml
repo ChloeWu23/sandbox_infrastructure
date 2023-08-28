@@ -45,7 +45,7 @@ stages:
             SourceFolder: '$(Agent.TempDirectory)'
             Contents: 'id_rsa.pub'
             TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
-         - task: CopyFiles@2
+        - task: CopyFiles@2
           inputs:
             SourceFolder: '$(Agent.TempDirectory)'
             Contents: 'cadt.pfx'
