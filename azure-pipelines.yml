@@ -146,7 +146,7 @@ stages:
             command: 'custom'
             workingDirectory: '$(System.DefaultWorkingDirectory)/master'
             customCommand: 'workspace'
-            commandOptions: 'select develop'
+            commandOptions: 'select main'
             outputTo: 'console'
             environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
             backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
