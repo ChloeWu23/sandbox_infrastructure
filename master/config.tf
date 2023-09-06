@@ -20,9 +20,9 @@ locals {
      "main"    = ["172.40.0.0/16"] 
   }
   k8s_subnet_range = {
-     "default" = ["172.10.0.0/22"]
+     "default" = ["172.30.0.0/22"]
      "develop" = ["172.20.0.0/22"]
-     "main"    = ["172.40.0.0/22"] 
+     "main"    = ["172.10.0.0/22"] 
   }
   appgw_subnet_range = {
      "default" = ["172.10.16.0/20"]
