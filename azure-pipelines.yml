@@ -1,0 +1,217 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- develop
+
+variables:
+- group: sandbox-infra-variable
+pool:
+  vmImage: ubuntu-latest
+stages:
+  - stage: 
+    jobs:
+      - job:
+        displayName: Build
+        pool:
+         vmImage: ubuntu-latest
+
+        steps: 
+        #- checkout: git://clearly-earth/Sandbox/sandbox_infrastructure
+        - checkout: self
+        
+        - task: DownloadSecureFile@1
+          name: sshfile
+          inputs:
+            secureFile: 'id_rsa.pub'
+            retryCount: 8
+
+        - task: DownloadSecureFile@1
+          inputs:
+            secureFile: 'cadt.pfx'
+            retryCount: 8
+        # - task: DownloadSecureFile@1
+        #   inputs:
+        #     secureFile: 'clearly-stage.pfx'
+        #     retryCount: 8
+        # - task: DownloadSecureFile@1
+        #   inputs:
+        #     secureFile: 'clearly-main.pfx'
+        #     retryCount: 8
+
+           
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'id_rsa.pub'
+            TargetFolder: '$(Build.SourcesDirectory)/master/.ssh'
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: 'cadt.pfx'
+            TargetFolder: '$(Build.SourcesDirectory)/master'
+
+        - script: ls $(Build.SourcesDirectory)/master/.ssh
+        - script: echo "##vso[task.setvariable variable=ssh_public_key]$(Build.SourcesDirectory)/master/.ssh/id_rsa.pub"
+        - script: echo "The value of ssh_public_key variable is $(ssh_public_key)"
+        
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              pwd 
+              ls
+              cd '$(Build.SourcesDirectory)/master'
+              pwd
+              ls
+              cd '$(Build.SourcesDirectory)/master/.ssh'
+              pwd
+              ls
+         
+        - task: TerraformInstaller@1
+          inputs:
+           terraformVersion: 'latest'
+
+        # - task: replacetokens@5
+        #   displayName: 'Replace tokens in **/*.tfvars **/*.tf '
+        #   inputs:
+        #     rootDirectory: '$(System.DefaultWorkingDirectory)/master'
+        #     targetFiles: |
+        #       **/*.tfvars
+        #       **/*.tf
+        #     encoding: 'auto'
+        #     tokenPattern: 'default'
+        #     writeBOM: true
+        #     actionOnMissing: 'warn'
+        #     keepToken: false
+        #     actionOnNoFiles: 'continue'
+        #     enableTransforms: false
+        #     enableRecursion: false
+        #     useLegacyPattern: false
+        #     enableTelemetry: true
+              
+        - task: replacetokens@5
+          inputs:
+            rootDirectory: '$(System.DefaultWorkingDirectory)/master'
+            targetFiles: |
+              **/*.tfvars
+              **/*.tf
+            encoding: 'auto'
+            tokenPattern: 'default'
+            writeBOM: true
+            actionOnMissing: 'warn'
+            keepToken: false
+            actionOnNoFiles: 'continue'
+            enableTransforms: false
+            enableRecursion: false
+            useLegacyPattern: false
+            enableTelemetry: true
+        # - task: Bash@3
+        #   inputs:
+        #     targetType: 'inline'
+        #     script: |
+        #       cd $(System.DefaultWorkingDirectory)
+        #       terraform init -reconfigure
+              
+        # - task: TerraformTaskV4@4
+        #   displayName: Terrafrom init
+        #   inputs:
+        #     provider: 'azurerm'
+        #     command: 'init'
+        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
+        #     backendServiceArm: 'cadt'
+        #     backendAzureRmResourceGroupName: 'clearly-earth-terraform-backup'
+        #     backendAzureRmStorageAccountName: 'clearlyearthterraform'
+        #     backendAzureRmContainerName: 'clearlyterraformstate'
+        #     backendAzureRmKey: 'terraform.state'
+
+        - task: TerraformTaskV4@4
+          displayName: Terraform Init
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            backendServiceArm: 'Microsoft Azure Sponsorship(6a1f227b-1c08-4e03-943d-1d5491da845c)'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
+
+        - task: TerraformTaskV4@4
+          displayName: Terraform Select workspace 
+          inputs:
+            provider: 'azurerm'
+            command: 'custom'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/master'
+            customCommand: 'workspace'
+            commandOptions: 'select main'
+            outputTo: 'console'
+            environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
+
+        - task: TerraformTaskV4@4
+          displayName: Terraform Validate
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
+
+        - task: TerraformTaskV4@4
+          displayName: Terraform Plan
+          env:
+            TF_VAR_ssh_public_key: $(ssh_public_key)
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
+
+        # - task: TerraformTaskV4@4
+        #   displayName: Terraform Apply
+        #   env:
+        #     TF_VAR_ssh_public_key: $(ssh_public_key)
+        #   inputs:
+        #     provider: 'azurerm'
+        #     command: 'apply'
+        #     workingDirectory: $(System.DefaultWorkingDirectory)/master
+        #     environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+        #     backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+        #     backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+        #     backendAzureRmContainerName: 'sandboxterraformstate'
+        #     backendAzureRmKey: 'terraform.state'
+        - task: TerraformTaskV4@4
+          displayName: Terraform Destroy
+          env:
+            TF_VAR_ssh_public_key: $(ssh_public_key)
+          inputs:
+            provider: 'azurerm'
+            command: 'destroy'
+            workingDirectory: $(System.DefaultWorkingDirectory)/master
+            environmentServiceNameAzureRM: 'Terraform Azure Access-Sandbox'
+            backendAzureRmResourceGroupName: 'sandbox-cadt-terraform-backup'
+            backendAzureRmStorageAccountName: 'sandboxcadtterraform'
+            backendAzureRmContainerName: 'sandboxterraformstate'
+            backendAzureRmKey: 'terraform.state'
+
+
+
+        
+
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'terraform artifact'
+            publishLocation: 'pipeline'

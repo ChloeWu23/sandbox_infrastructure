@@ -1,0 +1,17 @@
+# attach the secrets to the keyvault 
+resource "azurerm_key_vault_secret" "secret_stage" {
+  
+  count         = length(var.keyvaultsecrets) > 0 ? local.isMain == 1 ? length(var.keyvaultsecrets) : 0 : 0
+  name          = keys(var.keyvaultsecrets)[count.index]
+  value         = values(var.keyvaultsecrets)[count.index]
+  key_vault_id  = local.isMain == 1 ?  azurerm_key_vault.clearly_keyvault_stage[0].id : azurerm_key_vault.clearly_keyvault_stage[count.index].id
+  tags          = {
+    Environment = local.environment
+    Product     = local.productprefix
+  }
+  depends_on    = [
+    azurerm_key_vault.clearly_keyvault_stage,
+    azurerm_key_vault_access_policy.clearly_keyvault_policyTerraform_stage
+    # azurerm_key_vault_access_policy.clearly_keyvault_policy_managedidentity
+  ]
+}
